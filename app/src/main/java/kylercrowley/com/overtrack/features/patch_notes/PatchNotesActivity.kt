@@ -19,13 +19,17 @@ import kylercrowley.com.overtrack.di.patch_notes.PatchNotesActivityModule
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import timber.log.Timber
+import javax.inject.Inject
 
 class PatchNotesActivity : RxBaseAppCompatActivity() {
 
     private lateinit var patchNotesActivityComponent: PatchNotesActivityComponent
-    private lateinit var lootboxApiService: LootboxApiService
 
-    private lateinit var patchNotesAdapter: PatchNoteAdapter
+    @Inject
+    lateinit var lootboxApiService: LootboxApiService
+
+    @Inject
+    lateinit var patchNotesAdapter: PatchNoteAdapter
 
     @BindView(R.id.patch_notes_list_view)
     lateinit var listView: ListView
@@ -44,11 +48,9 @@ class PatchNotesActivity : RxBaseAppCompatActivity() {
                 .applicationComponent(App.get(this).getComponent())
                 .build()
 
-        // LootboxApiService is provided by the component.
-        lootboxApiService = patchNotesActivityComponent.getLootboxApiService()
+        patchNotesActivityComponent.injectPatchNotesActivity(this)
 
         // Set the Adapter for the ListView.
-        patchNotesAdapter = patchNotesActivityComponent.getPatchNoteAdapter()
         listView.adapter = patchNotesAdapter
 
         // Set a Listener for the SwipeRefreshLayout.
