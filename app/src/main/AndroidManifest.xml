@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".features.patch_notes.PatchNotesActivity"></activity>
+        <activity android:name=".features.patch_notes.PatchNotesActivity" />
+        <activity android:name=".features.patch_notes.PatchNoteDetailActivity"></activity>
     </application>
 
 </manifest>

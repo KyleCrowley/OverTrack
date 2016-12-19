@@ -4,4 +4,7 @@
     <!-- MainActivity Strings -->
     <string name="button_player_search">Player Search</string>
     <string name="button_patch_notes">Patch Notes</string>
+
+    <!-- PatchNotesActivity Strings -->
+    <string name="patch_note_start_text">Overwatch Patch Notes - %s</string>
 </resources>

@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import kylercrowley.com.overtrack.di.ActivityModule
 import kylercrowley.com.overtrack.di.ActivityScope
+import kylercrowley.com.overtrack.features.patch_notes.PatchNoteAdapter
 import kylercrowley.com.overtrack.features.patch_notes.PatchNotesActivity
 
 @Module
@@ -17,5 +18,5 @@ class PatchNotesActivityModule(activity: PatchNotesActivity) : ActivityModule(ac
 
     @Provides
     @ActivityScope
-    fun providePatchNotesActivityContext(): Context = activity.baseContext
+    fun providePatchNoteAdapter(context: Context): PatchNoteAdapter = PatchNoteAdapter(context)
 }
