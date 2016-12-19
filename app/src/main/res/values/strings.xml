@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">OverTrack</string>
+
+    <!-- MainActivity Strings -->
+    <string name="button_player_search">Player Search</string>
+    <string name="button_patch_notes">Patch Notes</string>
 </resources>

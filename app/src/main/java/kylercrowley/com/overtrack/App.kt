@@ -1,6 +1,7 @@
 package kylercrowley.com.overtrack
 
 import android.app.Application
+import android.support.v7.app.AppCompatActivity
 import kylercrowley.com.overtrack.api.LootboxApiService
 import kylercrowley.com.overtrack.di.ApplicationComponent
 import kylercrowley.com.overtrack.di.ApplicationModule
@@ -11,6 +12,10 @@ class App : Application() {
 
     private lateinit var applicationComponent: ApplicationComponent
     private lateinit var lootboxApiService: LootboxApiService
+
+    companion object {
+        fun get(activity: AppCompatActivity): App = activity.application as App
+    }
 
     override fun onCreate() {
         super.onCreate()
