@@ -2,26 +2,22 @@ package kylercrowley.com.overtrack.features.player_search
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import butterknife.BindView
 import butterknife.ButterKnife
 import kylercrowley.com.overtrack.*
-import kylercrowley.com.overtrack.api.LootboxApiService
-import kylercrowley.com.overtrack.di.DaggerPlayerSearchActivityComponent
-import kylercrowley.com.overtrack.di.PlayerSearchActivityComponent
-import kylercrowley.com.overtrack.di.PlayerSearchActivityModule
+import kylercrowley.com.overtrack.di.player_search.DaggerPlayerSearchActivityComponent
+import kylercrowley.com.overtrack.di.player_search.PlayerSearchActivityComponent
+import kylercrowley.com.overtrack.di.player_search.PlayerSearchActivityModule
 import kylercrowley.com.overtrack.features.profile.PlayerProfileActivity
-import timber.log.Timber
 import javax.inject.Inject
 
-class PlayerSearchActivity : RxBaseAppCompatActivity() {
+class PlayerSearchActivity : AppCompatActivity() {
 
     private lateinit var playerSearchActivityComponent: PlayerSearchActivityComponent
-
-    @Inject
-    lateinit var lootboxApiService: LootboxApiService
 
     @Inject
     lateinit var regionAdapter: RegionSpinnerAdapter

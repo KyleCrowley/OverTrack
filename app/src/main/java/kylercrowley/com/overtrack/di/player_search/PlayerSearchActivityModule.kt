@@ -1,9 +1,11 @@
-package kylercrowley.com.overtrack.di
+package kylercrowley.com.overtrack.di.player_search
 
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import dagger.Module
 import dagger.Provides
+import kylercrowley.com.overtrack.di.ActivityModule
+import kylercrowley.com.overtrack.di.ActivityScope
 import kylercrowley.com.overtrack.features.player_search.PlatformSpinnerAdapter
 import kylercrowley.com.overtrack.features.player_search.PlayerSearchActivity
 import kylercrowley.com.overtrack.features.player_search.RegionSpinnerAdapter
