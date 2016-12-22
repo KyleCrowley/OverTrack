@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_names">
+        <item>@string/category_combat</item>
+        <item>@string/category_assists</item>
+        <item>@string/category_best</item>
+        <item>@string/category_average</item>
+        <item>@string/category_deaths</item>
+        <item>@string/category_match_awards</item>
+        <item>@string/category_game</item>
+        <item>@string/category_miscellaneous</item>
+    </string-array>
+</resources>

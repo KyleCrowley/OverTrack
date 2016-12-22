@@ -22,4 +22,12 @@ interface LootboxApiService {
             @Path("region") region: String,
             @Path("tag") tag: String
     ): Call<LootboxPlayerProfileResponse>
+
+    @GET("/{platform}/{region}/{tag}/{mode}/allHeroes/")
+    fun getAllHeroStats(
+            @Path("platform") platform: String,
+            @Path("region") region: String,
+            @Path("tag") tag: String,
+            @Path("mode") mode: String
+    ): Call<LootboxPlayerAllHeroStats>
 }

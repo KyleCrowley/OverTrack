@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Header (Category Image/Name) -->
+        <LinearLayout
+            android:id="@+id/stat_category_header"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@color/grey_500">
+
+            <!-- Category Image -->
+            <ImageView
+                android:id="@+id/stat_category_image_view"
+                android:layout_width="64dp"
+                android:layout_height="match_parent" />
+
+            <!-- Category Name -->
+            <TextView
+                android:id="@+id/stat_category_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="32sp" />
+
+        </LinearLayout>
+
+        <!-- Stat List -->
+        <ListView
+            android:id="@+id/stat_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/stat_category_header"></ListView>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

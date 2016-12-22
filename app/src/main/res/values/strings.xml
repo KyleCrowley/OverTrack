@@ -4,6 +4,9 @@
     <!-- Alert Strings -->
     <string name="positive_button">OK</string>
 
+    <!-- Errors -->
+    <string name="player_not_found">Failed to find a user with that platform, region and username.</string>
+
     <!-- MainActivity Strings -->
     <string name="button_player_search">Player Search</string>
     <string name="button_patch_notes">Patch Notes</string>
@@ -14,4 +17,14 @@
     <!-- PlayerSearchActivity -->
     <string name="player_tag">Username (Battle.Net, XBL or PSN)</string>
     <string name="player_search_text">Search</string>
+
+    <!-- Stat Category Strings -->
+    <string name="category_combat">Combat</string>
+    <string name="category_assists">Assists</string>
+    <string name="category_best">Best</string>
+    <string name="category_average">Average</string>
+    <string name="category_deaths">Deaths</string>
+    <string name="category_match_awards">Match Awards</string>
+    <string name="category_game">Game</string>
+    <string name="category_miscellaneous">Miscellaneous</string>
 </resources>

@@ -8,4 +8,9 @@
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="android:textColor">@color/textColor</item>
     </style>
+
+    <style name="ButtonInverse" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorBackground</item>
+    </style>
 </resources>

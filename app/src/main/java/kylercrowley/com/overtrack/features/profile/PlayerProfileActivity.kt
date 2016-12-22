@@ -3,6 +3,8 @@ package kylercrowley.com.overtrack.features.profile
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
@@ -13,19 +15,23 @@ import kylercrowley.com.overtrack.PROFILE_ARRAY_KEY
 import kylercrowley.com.overtrack.R
 import kylercrowley.com.overtrack.RxBaseAppCompatActivity
 import kylercrowley.com.overtrack.api.LootboxApiService
+import kylercrowley.com.overtrack.api.LootboxPlayerAllHeroStats
 import kylercrowley.com.overtrack.api.LootboxPlayerProfile
 import kylercrowley.com.overtrack.di.player_profile.DaggerPlayerProfileActivityComponent
 import kylercrowley.com.overtrack.di.player_profile.PlayerProfileActivityComponent
 import kylercrowley.com.overtrack.di.player_profile.PlayerProfileActivityModule
 import kylercrowley.com.overtrack.utils.ProfileUtils
+import kylercrowley.com.overtrack.utils.StatUtils.Companion.getAllHeroStatsList
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import timber.log.Timber
 import javax.inject.Inject
 
 class PlayerProfileActivity : RxBaseAppCompatActivity() {
 
     private lateinit var playerProfileActivityComponent: PlayerProfileActivityComponent
+
+    @Inject
+    lateinit var statAdapter: StatAdapter
 
     @Inject
     lateinit var lootboxApiService: LootboxApiService
@@ -44,6 +50,9 @@ class PlayerProfileActivity : RxBaseAppCompatActivity() {
 
     @BindView(R.id.star_text_view)
     lateinit var starTextView: TextView
+
+    @BindView(R.id.stat_recycler_view)
+    lateinit var statRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +77,8 @@ class PlayerProfileActivity : RxBaseAppCompatActivity() {
             val params = bundle.getStringArray(PROFILE_ARRAY_KEY)
 
             getProfile(params[0], params[1], params[2])
+
+            getQuickplayStats(params[0], params[1], params[2])
         }
     }
 
@@ -82,10 +93,43 @@ class PlayerProfileActivity : RxBaseAppCompatActivity() {
                             retrievedProfile ->
 
                             if (retrievedProfile != null) {
-                                Timber.d(retrievedProfile.toString())
+                                //Timber.d(retrievedProfile.toString())
 
-                                updateView(retrievedProfile)
+                                updateProfileHeader(retrievedProfile)
 
+                            } else {
+                                showErrorDialog()
+                            }
+                        },
+
+                        // onError
+                        {
+                            e ->
+                            // TODO: Better error handling?
+
+                            showErrorDialog()
+                        }
+                )
+
+
+        // Add the subscription to the subscriptions.
+        subscriptions.add(subscription)
+    }
+
+    fun getQuickplayStats(platform: String, region: String, tag: String) {
+        // Create a new Subscription.
+        val subscription = PlayerStatsManager(lootboxApiService, platform, region, tag).requestQuickplayStats()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()) // REQUIRED: UI updates on main thread.
+                .subscribe(
+                        // onNext
+                        {
+                            stats ->
+
+                            if (stats != null) {
+                                //Timber.d(stats.toString())
+
+                                updateStatsView(stats)
 
                             } else {
                                 showErrorDialog()
@@ -109,13 +153,13 @@ class PlayerProfileActivity : RxBaseAppCompatActivity() {
     fun showErrorDialog() {
         val builder = AlertDialog.Builder(this)
         builder.setPositiveButton(R.string.positive_button, DialogInterface.OnClickListener { dialogInterface, i -> finish() })
-        builder.setMessage("Failed to find a user with that platform, region and username.")
+        builder.setMessage(resources.getString(R.string.player_not_found))
 
         val alert = builder.create()
         alert.show()
     }
 
-    fun updateView(profile: LootboxPlayerProfile) {
+    fun updateProfileHeader(profile: LootboxPlayerProfile) {
         picasso.load(profile.avatar).into(avatarImageView)
         usernameTextView.text = profile.username
 
@@ -124,5 +168,16 @@ class PlayerProfileActivity : RxBaseAppCompatActivity() {
 
         //rankTextView.text = profile.competitive.rank
         //picasso.load(profile.competitive.rank_img).into(rankImageView)
+    }
+
+    fun updateStatsView(stats: LootboxPlayerAllHeroStats) {
+        val categoryNames = resources.getStringArray(R.array.category_names)
+
+        val layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation = LinearLayoutManager.VERTICAL
+
+        statRecyclerView.layoutManager = layoutManager
+        statRecyclerView.adapter = statAdapter
+        statAdapter.swapData(getAllHeroStatsList(categoryNames, stats))
     }
 }

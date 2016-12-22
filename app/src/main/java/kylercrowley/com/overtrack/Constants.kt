@@ -20,3 +20,4 @@ val REGIONS = arrayOf(
 )
 
 val PROFILE_ARRAY_KEY = "profile"
+
