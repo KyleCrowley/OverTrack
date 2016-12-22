@@ -7,4 +7,8 @@
 
     <!-- PatchNotesActivity Strings -->
     <string name="patch_note_start_text">Overwatch Patch Notes - %s</string>
+
+    <!-- PlayerSearchActivity -->
+    <string name="player_tag">Username (Battle.Net, XBL or PSN)</string>
+    <string name="player_search_text">Search</string>
 </resources>

@@ -7,6 +7,7 @@ import android.widget.Button
 import butterknife.BindView
 import butterknife.ButterKnife
 import kylercrowley.com.overtrack.features.patch_notes.PatchNotesActivity
+import kylercrowley.com.overtrack.features.player_search.PlayerSearchActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +22,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         ButterKnife.bind(this)
+
+        playerSearchButton.setOnClickListener { view ->
+            startActivity(Intent(this, PlayerSearchActivity::class.java))
+        }
 
         patchNotesButton.setOnClickListener { view ->
             startActivity(Intent(this, PatchNotesActivity::class.java))

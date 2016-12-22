@@ -22,7 +22,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".features.patch_notes.PatchNotesActivity" />
-        <activity android:name=".features.patch_notes.PatchNoteDetailActivity"></activity>
+        <activity android:name=".features.patch_notes.PatchNoteDetailActivity" />
+        <activity android:name=".features.player_search.PlayerSearchActivity" />
+        <activity android:name=".features.profile.PlayerProfileActivity"></activity>
     </application>
 
 </manifest>
