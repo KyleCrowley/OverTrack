@@ -1,4 +1,4 @@
-package kylercrowley.com.overtrack.di
+package kylercrowley.com.overtrack.di.scopes
 
 import javax.inject.Scope
 

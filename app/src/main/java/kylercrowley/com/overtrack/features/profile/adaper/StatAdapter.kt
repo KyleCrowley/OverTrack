@@ -1,4 +1,4 @@
-package kylercrowley.com.overtrack.features.profile
+package kylercrowley.com.overtrack.features.profile.adaper
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

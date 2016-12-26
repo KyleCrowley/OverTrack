@@ -1,4 +1,4 @@
-package kylercrowley.com.overtrack.features.player_search
+package kylercrowley.com.overtrack.features.player_search.adapter
 
 import android.content.Context
 import android.graphics.Color

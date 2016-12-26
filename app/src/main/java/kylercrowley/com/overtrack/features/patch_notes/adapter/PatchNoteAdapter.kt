@@ -1,4 +1,4 @@
-package kylercrowley.com.overtrack.features.patch_notes
+package kylercrowley.com.overtrack.features.patch_notes.adapter
 
 import android.content.Context
 import android.view.View
