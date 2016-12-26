@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import dagger.Module
 import dagger.Provides
 import kylercrowley.com.overtrack.di.ActivityModule
-import kylercrowley.com.overtrack.di.ActivityScope
-import kylercrowley.com.overtrack.features.patch_notes.PatchNoteAdapter
+import kylercrowley.com.overtrack.di.scopes.ActivityScope
+import kylercrowley.com.overtrack.features.patch_notes.adapter.PatchNoteAdapter
 import kylercrowley.com.overtrack.features.patch_notes.PatchNotesActivity
 
 @Module

@@ -21,3 +21,8 @@ val REGIONS = arrayOf(
 
 val PROFILE_ARRAY_KEY = "profile"
 
+val MODES = arrayOf(
+        "quickplay",
+        "competitive"
+)
+

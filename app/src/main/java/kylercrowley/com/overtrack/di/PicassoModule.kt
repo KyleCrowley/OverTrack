@@ -5,6 +5,7 @@ import com.jakewharton.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
+import kylercrowley.com.overtrack.di.scopes.ApplicationScope
 import okhttp3.OkHttpClient
 
 @Module(includes = arrayOf(ApplicationModule::class, NetworkModule::class))

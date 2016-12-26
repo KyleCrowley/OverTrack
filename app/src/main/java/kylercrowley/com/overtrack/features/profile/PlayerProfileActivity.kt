@@ -3,8 +3,8 @@ package kylercrowley.com.overtrack.features.profile
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.support.design.widget.TabLayout
+import android.support.v4.view.ViewPager
 import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
@@ -15,13 +15,12 @@ import kylercrowley.com.overtrack.PROFILE_ARRAY_KEY
 import kylercrowley.com.overtrack.R
 import kylercrowley.com.overtrack.RxBaseAppCompatActivity
 import kylercrowley.com.overtrack.api.LootboxApiService
-import kylercrowley.com.overtrack.api.LootboxPlayerAllHeroStats
 import kylercrowley.com.overtrack.api.LootboxPlayerProfile
 import kylercrowley.com.overtrack.di.player_profile.DaggerPlayerProfileActivityComponent
 import kylercrowley.com.overtrack.di.player_profile.PlayerProfileActivityComponent
 import kylercrowley.com.overtrack.di.player_profile.PlayerProfileActivityModule
+import kylercrowley.com.overtrack.features.profile.adaper.CustomFragmentPagerAdapter
 import kylercrowley.com.overtrack.utils.ProfileUtils
-import kylercrowley.com.overtrack.utils.StatUtils.Companion.getAllHeroStatsList
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import javax.inject.Inject
@@ -31,7 +30,7 @@ class PlayerProfileActivity : RxBaseAppCompatActivity() {
     private lateinit var playerProfileActivityComponent: PlayerProfileActivityComponent
 
     @Inject
-    lateinit var statAdapter: StatAdapter
+    lateinit var allHeroStatsParentFragment: AllHeroStatsParentFragment
 
     @Inject
     lateinit var lootboxApiService: LootboxApiService
@@ -51,8 +50,11 @@ class PlayerProfileActivity : RxBaseAppCompatActivity() {
     @BindView(R.id.star_text_view)
     lateinit var starTextView: TextView
 
-    @BindView(R.id.stat_recycler_view)
-    lateinit var statRecyclerView: RecyclerView
+    @BindView(R.id.tab_layout)
+    lateinit var tabLayout: TabLayout
+
+    @BindView(R.id.view_pager)
+    lateinit var viewPager: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,8 +80,27 @@ class PlayerProfileActivity : RxBaseAppCompatActivity() {
 
             getProfile(params[0], params[1], params[2])
 
-            getQuickplayStats(params[0], params[1], params[2])
+            setupViewPager(bundle)
+            setupTabLayout()
+        } else {
+            // TODO: Error Handle
         }
+    }
+
+    private fun setupTabLayout() {
+        tabLayout.setupWithViewPager(viewPager)
+    }
+
+    private fun setupViewPager(bundle: Bundle) {
+
+        val playerProfilePagerAdapter = CustomFragmentPagerAdapter(supportFragmentManager)
+
+        // Pass the Bundle to the Fragment
+        allHeroStatsParentFragment.arguments = bundle
+
+        playerProfilePagerAdapter.addFragment(allHeroStatsParentFragment, resources.getString(R.string.all_hero_stats_tab_name))
+        viewPager.adapter = playerProfilePagerAdapter
+        viewPager.pageMargin = 0
     }
 
     fun getProfile(platform: String, region: String, tag: String) {
@@ -116,49 +137,6 @@ class PlayerProfileActivity : RxBaseAppCompatActivity() {
         subscriptions.add(subscription)
     }
 
-    fun getQuickplayStats(platform: String, region: String, tag: String) {
-        // Create a new Subscription.
-        val subscription = PlayerStatsManager(lootboxApiService, platform, region, tag).requestQuickplayStats()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()) // REQUIRED: UI updates on main thread.
-                .subscribe(
-                        // onNext
-                        {
-                            stats ->
-
-                            if (stats != null) {
-                                //Timber.d(stats.toString())
-
-                                updateStatsView(stats)
-
-                            } else {
-                                showErrorDialog()
-                            }
-                        },
-
-                        // onError
-                        {
-                            e ->
-                            // TODO: Better error handling?
-
-                            showErrorDialog()
-                        }
-                )
-
-
-        // Add the subscription to the subscriptions.
-        subscriptions.add(subscription)
-    }
-
-    fun showErrorDialog() {
-        val builder = AlertDialog.Builder(this)
-        builder.setPositiveButton(R.string.positive_button, DialogInterface.OnClickListener { dialogInterface, i -> finish() })
-        builder.setMessage(resources.getString(R.string.player_not_found))
-
-        val alert = builder.create()
-        alert.show()
-    }
-
     fun updateProfileHeader(profile: LootboxPlayerProfile) {
         picasso.load(profile.avatar).into(avatarImageView)
         usernameTextView.text = profile.username
@@ -170,14 +148,12 @@ class PlayerProfileActivity : RxBaseAppCompatActivity() {
         //picasso.load(profile.competitive.rank_img).into(rankImageView)
     }
 
-    fun updateStatsView(stats: LootboxPlayerAllHeroStats) {
-        val categoryNames = resources.getStringArray(R.array.category_names)
+    fun showErrorDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setPositiveButton(R.string.positive_button, DialogInterface.OnClickListener { dialogInterface, i -> finish() })
+        builder.setMessage(resources.getString(R.string.player_not_found))
 
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
-
-        statRecyclerView.layoutManager = layoutManager
-        statRecyclerView.adapter = statAdapter
-        statAdapter.swapData(getAllHeroStatsList(categoryNames, stats))
+        val alert = builder.create()
+        alert.show()
     }
 }

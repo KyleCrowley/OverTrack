@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import kylercrowley.com.overtrack.api.LOOTBOX_API_BASE_URL
 import kylercrowley.com.overtrack.api.LootboxApiService
+import kylercrowley.com.overtrack.di.scopes.ApplicationScope
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

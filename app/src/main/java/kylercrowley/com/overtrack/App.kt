@@ -1,6 +1,7 @@
 package kylercrowley.com.overtrack
 
 import android.app.Application
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import kylercrowley.com.overtrack.api.LootboxApiService
 import kylercrowley.com.overtrack.di.ApplicationComponent

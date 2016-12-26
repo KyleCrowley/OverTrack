@@ -16,6 +16,7 @@ import kylercrowley.com.overtrack.api.LootboxPatchNote
 import kylercrowley.com.overtrack.di.patch_notes.DaggerPatchNotesActivityComponent
 import kylercrowley.com.overtrack.di.patch_notes.PatchNotesActivityComponent
 import kylercrowley.com.overtrack.di.patch_notes.PatchNotesActivityModule
+import kylercrowley.com.overtrack.features.patch_notes.adapter.PatchNoteAdapter
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import timber.log.Timber

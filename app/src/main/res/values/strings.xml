@@ -14,9 +14,14 @@
     <!-- PatchNotesActivity Strings -->
     <string name="patch_note_start_text">Overwatch Patch Notes - %s</string>
 
-    <!-- PlayerSearchActivity -->
+    <!-- PlayerSearchActivity String -->
     <string name="player_tag">Username (Battle.Net, XBL or PSN)</string>
     <string name="player_search_text">Search</string>
+
+    <!-- PlayerProfileActivity Strings -->
+    <string name="quickplay">Quickplay</string>
+    <string name="competitive">Competitive</string>
+    <string name="all_hero_stats_tab_name">Stats: All Heroes</string>
 
     <!-- Stat Category Strings -->
     <string name="category_combat">Combat</string>
@@ -27,4 +32,7 @@
     <string name="category_match_awards">Match Awards</string>
     <string name="category_game">Game</string>
     <string name="category_miscellaneous">Miscellaneous</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

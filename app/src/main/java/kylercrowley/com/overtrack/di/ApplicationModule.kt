@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import kylercrowley.com.overtrack.di.scopes.ApplicationScope
 
 @Module
 class ApplicationModule(private val application: Application) {

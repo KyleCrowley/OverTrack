@@ -5,9 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import dagger.Module
 import dagger.Provides
 import kylercrowley.com.overtrack.di.ActivityModule
-import kylercrowley.com.overtrack.di.ActivityScope
+import kylercrowley.com.overtrack.di.scopes.ActivityScope
+import kylercrowley.com.overtrack.features.profile.AllHeroStatsParentFragment
 import kylercrowley.com.overtrack.features.profile.PlayerProfileActivity
-import kylercrowley.com.overtrack.features.profile.StatAdapter
+import kylercrowley.com.overtrack.features.profile.adaper.StatAdapter
 
 @Module
 class PlayerProfileActivityModule(activity: PlayerProfileActivity) : ActivityModule(activity) {
@@ -15,6 +16,10 @@ class PlayerProfileActivityModule(activity: PlayerProfileActivity) : ActivityMod
     @Provides
     @ActivityScope
     fun providePlayerProfileActivity(): AppCompatActivity = activity
+
+    @Provides
+    @ActivityScope
+    fun provideAllHeroStatsParentFragment(): AllHeroStatsParentFragment = AllHeroStatsParentFragment()
 
     @Provides
     @ActivityScope

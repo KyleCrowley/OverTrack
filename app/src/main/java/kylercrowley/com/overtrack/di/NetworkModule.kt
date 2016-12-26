@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import kylercrowley.com.overtrack.CACHE_FILE_NAME
 import kylercrowley.com.overtrack.CACHE_FILE_SIZE
+import kylercrowley.com.overtrack.di.scopes.ApplicationScope
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

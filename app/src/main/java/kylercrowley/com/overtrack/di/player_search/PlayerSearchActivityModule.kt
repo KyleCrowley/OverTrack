@@ -5,10 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import dagger.Module
 import dagger.Provides
 import kylercrowley.com.overtrack.di.ActivityModule
-import kylercrowley.com.overtrack.di.ActivityScope
-import kylercrowley.com.overtrack.features.player_search.PlatformSpinnerAdapter
+import kylercrowley.com.overtrack.di.scopes.ActivityScope
+import kylercrowley.com.overtrack.features.player_search.adapter.PlatformSpinnerAdapter
 import kylercrowley.com.overtrack.features.player_search.PlayerSearchActivity
-import kylercrowley.com.overtrack.features.player_search.RegionSpinnerAdapter
+import kylercrowley.com.overtrack.features.player_search.adapter.RegionSpinnerAdapter
 
 @Module
 class PlayerSearchActivityModule(activity: PlayerSearchActivity) : ActivityModule(activity) {

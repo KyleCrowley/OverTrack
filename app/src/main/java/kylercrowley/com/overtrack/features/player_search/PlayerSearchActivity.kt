@@ -12,6 +12,8 @@ import kylercrowley.com.overtrack.*
 import kylercrowley.com.overtrack.di.player_search.DaggerPlayerSearchActivityComponent
 import kylercrowley.com.overtrack.di.player_search.PlayerSearchActivityComponent
 import kylercrowley.com.overtrack.di.player_search.PlayerSearchActivityModule
+import kylercrowley.com.overtrack.features.player_search.adapter.PlatformSpinnerAdapter
+import kylercrowley.com.overtrack.features.player_search.adapter.RegionSpinnerAdapter
 import kylercrowley.com.overtrack.features.profile.PlayerProfileActivity
 import javax.inject.Inject
 
