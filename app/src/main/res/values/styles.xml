@@ -1,16 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:colorBackground">@color/colorBackground</item>
-        <item name="android:textColor">@color/textColor</item>
-    </style>
-
-    <style name="ButtonInverse" parent="Widget.AppCompat.Button.Colored">
-        <item name="colorButtonNormal">@color/colorPrimaryDark</item>
-        <item name="android:textColor">@color/colorBackground</item>
+    <style name="ColoredButton" parent="Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/primaryDark</item>
     </style>
 </resources>

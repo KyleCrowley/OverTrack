@@ -13,8 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +23,7 @@
         <activity android:name=".features.patch_notes.PatchNotesActivity" />
         <activity android:name=".features.patch_notes.PatchNoteDetailActivity" />
         <activity android:name=".features.player_search.PlayerSearchActivity" />
-        <activity android:name=".features.profile.PlayerProfileActivity"></activity>
+        <activity android:name=".features.profile.PlayerProfileActivity" />
     </application>
 
 </manifest>
