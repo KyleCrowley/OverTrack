@@ -3,15 +3,9 @@ package kylercrowley.com.overtrack.features.profile.adaper
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
+import org.jetbrains.anko.find
 
 class SimpleTextViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-    @BindView(android.R.id.text1)
-    lateinit var textView: TextView
-
-    init {
-        ButterKnife.bind(this, view)
-    }
+    val textView: TextView = view.find(android.R.id.text1)
 }

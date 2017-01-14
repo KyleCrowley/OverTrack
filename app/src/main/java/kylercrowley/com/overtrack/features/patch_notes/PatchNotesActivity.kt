@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.widget.SwipeRefreshLayout
 import android.widget.ListView
-import butterknife.BindView
-import butterknife.ButterKnife
 import kylercrowley.com.overtrack.App
 import kylercrowley.com.overtrack.PATCH_NOTE_HTML_KEY
 import kylercrowley.com.overtrack.R
@@ -17,6 +15,7 @@ import kylercrowley.com.overtrack.di.patch_notes.DaggerPatchNotesActivityCompone
 import kylercrowley.com.overtrack.di.patch_notes.PatchNotesActivityComponent
 import kylercrowley.com.overtrack.di.patch_notes.PatchNotesActivityModule
 import kylercrowley.com.overtrack.features.patch_notes.adapter.PatchNoteAdapter
+import org.jetbrains.anko.find
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import timber.log.Timber
@@ -32,17 +31,12 @@ class PatchNotesActivity : RxBaseAppCompatActivity() {
     @Inject
     lateinit var patchNotesAdapter: PatchNoteAdapter
 
-    @BindView(R.id.patch_notes_list_view)
-    lateinit var listView: ListView
-
-    @BindView(R.id.swipe_container)
-    lateinit var swipeContainer: SwipeRefreshLayout
+    val listView: ListView by lazy { find<ListView>(R.id.patch_notes_list_view) }
+    val swipeContainer: SwipeRefreshLayout by lazy { find<SwipeRefreshLayout>(R.id.swipe_container) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patch_notes)
-
-        ButterKnife.bind(this)
 
         patchNotesActivityComponent = DaggerPatchNotesActivityComponent.builder()
                 .patchNotesActivityModule(PatchNotesActivityModule(this))

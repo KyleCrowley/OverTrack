@@ -7,8 +7,6 @@ import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.widget.ImageView
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.squareup.picasso.Picasso
 import kylercrowley.com.overtrack.App
 import kylercrowley.com.overtrack.PROFILE_ARRAY_KEY
@@ -21,6 +19,7 @@ import kylercrowley.com.overtrack.di.player_profile.PlayerProfileActivityCompone
 import kylercrowley.com.overtrack.di.player_profile.PlayerProfileActivityModule
 import kylercrowley.com.overtrack.features.profile.adaper.CustomFragmentPagerAdapter
 import kylercrowley.com.overtrack.utils.ProfileUtils
+import org.jetbrains.anko.find
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import javax.inject.Inject
@@ -38,29 +37,16 @@ class PlayerProfileActivity : RxBaseAppCompatActivity() {
     @Inject
     lateinit var picasso: Picasso
 
-    @BindView(R.id.avatar_image_view)
-    lateinit var avatarImageView: ImageView
-
-    @BindView(R.id.username_text_view)
-    lateinit var usernameTextView: TextView
-
-    @BindView(R.id.level_text_view)
-    lateinit var levelTextView: TextView
-
-    @BindView(R.id.star_text_view)
-    lateinit var starTextView: TextView
-
-    @BindView(R.id.tab_layout)
-    lateinit var tabLayout: TabLayout
-
-    @BindView(R.id.view_pager)
-    lateinit var viewPager: ViewPager
+    val avatarImageView: ImageView by lazy { find<ImageView>(R.id.avatar_image_view) }
+    val usernameTextView: TextView by lazy { find<TextView>(R.id.username_text_view) }
+    val levelTextView: TextView by lazy { find<TextView>(R.id.level_text_view) }
+    val starTextView: TextView by lazy { find<TextView>(R.id.star_text_view) }
+    val tabLayout: TabLayout by lazy { find<TabLayout>(R.id.tab_layout) }
+    val viewPager: ViewPager by lazy { find<ViewPager>(R.id.view_pager) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player_profile)
-
-        ButterKnife.bind(this)
 
         // Get the Dagger Component the pertains to this Activity.
         playerProfileActivityComponent = DaggerPlayerProfileActivityComponent.builder()

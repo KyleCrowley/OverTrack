@@ -18,6 +18,34 @@ allprojects {
     repositories {
         jcenter()
     }
+
+    ext {
+        // Dependency Versions
+
+        // Android Support
+        supportVersion = "25.1.0"
+
+        // Dagger
+        daggerVersion = "2.8"
+
+        // RxJava and RxAndroid
+        rxJavaVersion = "1.2.3"
+        rxAndroidVersion = "1.2.1"
+
+        // Retrofit and OkHttp3
+        retrofitVersion = "2.1.0"
+        okhttp3Version = "3.5.0"
+
+        // Picasso
+        picassoVersion = "2.5.2"
+        picassoDownloaderVersion = "1.1.0"
+
+        // Timber
+        timberVersion = "4.4.0"
+
+        // Anko
+        ankoVersion= "0.8.3"
+    }
 }
 
 task clean(type: Delete) {

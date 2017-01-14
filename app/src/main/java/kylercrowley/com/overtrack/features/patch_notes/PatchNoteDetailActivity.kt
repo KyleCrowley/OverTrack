@@ -1,23 +1,19 @@
 package kylercrowley.com.overtrack.features.patch_notes
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.webkit.WebView
-import butterknife.BindView
-import butterknife.ButterKnife
 import kylercrowley.com.overtrack.PATCH_NOTE_HTML_KEY
 import kylercrowley.com.overtrack.R
+import org.jetbrains.anko.find
 
 class PatchNoteDetailActivity : AppCompatActivity() {
 
-    @BindView(R.id.patch_note_web_view)
-    lateinit var webView: WebView
+    val webView: WebView by lazy { find<WebView>(R.id.patch_note_web_view) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patch_note_detail)
-
-        ButterKnife.bind(this)
 
         // Get the extras from the Intent that called this Activity.
         val bundle: Bundle? = intent.extras

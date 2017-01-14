@@ -9,8 +9,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.BindView
-import butterknife.ButterKnife
 import kylercrowley.com.overtrack.App
 import kylercrowley.com.overtrack.PROFILE_ARRAY_KEY
 import kylercrowley.com.overtrack.R
@@ -22,10 +20,10 @@ import kylercrowley.com.overtrack.di.player_profile.AllHeroStatsFragmentModule
 import kylercrowley.com.overtrack.di.player_profile.DaggerAllHeroStatsFragmentComponent
 import kylercrowley.com.overtrack.features.profile.adaper.StatAdapter
 import kylercrowley.com.overtrack.utils.StatUtils
+import org.jetbrains.anko.find
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import timber.log.Timber
-import java.util.*
 import javax.inject.Inject
 
 class AllHeroStatsFragment : RxBaseFragment() {
@@ -40,14 +38,12 @@ class AllHeroStatsFragment : RxBaseFragment() {
     @Inject
     lateinit var lootboxApiService: LootboxApiService
 
-    @BindView(R.id.stat_recycler_view)
     lateinit var statRecyclerView: RecyclerView
+        private set
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater!!.inflate(R.layout.fragment_all_hero_stats, container, false)
-
-        ButterKnife.bind(this, view)
+        val view = inflater.inflate(R.layout.fragment_all_hero_stats, container, false)
 
         allHeroStatsFragmentComponent = DaggerAllHeroStatsFragmentComponent.builder()
                 .allHeroStatsFragmentModule(AllHeroStatsFragmentModule(this))
@@ -63,14 +59,23 @@ class AllHeroStatsFragment : RxBaseFragment() {
             mParams = arguments.getStringArray(PROFILE_ARRAY_KEY)
         }
 
-        getStats(mParams[0], mParams[1], mParams[2], mParams[3])
+        if (view != null) {
+            setupRecyclerView(view)
+            getStats(mParams[0], mParams[1], mParams[2], mParams[3])
+            return view
+        }
 
-        return view
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         outState?.putStringArray(PROFILE_ARRAY_KEY, mParams)
+    }
+
+    fun setupRecyclerView(view: View) {
+        statRecyclerView = view.find<RecyclerView>(R.id.stat_recycler_view)
+        statRecyclerView.adapter = statAdapter
     }
 
     fun getStats(platform: String, region: String, tag: String, mode: String) {

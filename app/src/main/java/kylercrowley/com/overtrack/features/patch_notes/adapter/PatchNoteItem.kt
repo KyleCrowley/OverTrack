@@ -4,24 +4,19 @@ import android.content.Context
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import kylercrowley.com.overtrack.R
 import kylercrowley.com.overtrack.api.LootboxPatchNote
+import org.jetbrains.anko.find
 import java.text.DateFormat
 import java.util.*
 
 class PatchNoteItem(context: Context) : FrameLayout(context) {
 
-    @BindView(R.id.patch_note_detail_text_view)
-    lateinit var patchNoteDetailTextView: TextView
-
-    @BindView(R.id.patch_note_build_number_text_view)
-    lateinit var patchNoteBuildNumberTextView: TextView
+    val patchNoteDetailTextView: TextView by lazy { find<TextView>(R.id.patch_note_detail_text_view) }
+    val patchNoteBuildNumberTextView: TextView by lazy { find<TextView>(R.id.patch_note_build_number_text_view) }
 
     init {
         View.inflate(getContext(), R.layout.item_patch_note, this)
-        ButterKnife.bind(this)
     }
 
     fun setPatchNote(patchNote: LootboxPatchNote): Unit {
